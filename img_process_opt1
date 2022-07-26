@@ -24,7 +24,7 @@ for img in glob.glob(in_dir + "/*"):
         print()
 
     # The following testing block is optional.
-	# Test the output files.
+    # Test the output files.
     print("Check...")
     # Check if the file exist in the ouput folder.
     if (name + ext) in os.listdir(out_dir):
@@ -33,7 +33,7 @@ for img in glob.glob(in_dir + "/*"):
         # Check the output size and format.
         with Image.open(out_dir + name + ext) as out_im:
             print('New size: ' + str(out_im.size))
-            print('New format: ' + str(out_im.format))
+            print('New format: ' + out_im.format)
             print()
             print()
         out_im.close()
