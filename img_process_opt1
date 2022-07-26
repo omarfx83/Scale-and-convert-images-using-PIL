@@ -23,7 +23,8 @@ for img in glob.glob(in_dir + "/*"):
         im.close()
         print()
 
-    # Test the output files.
+    # The following testing block is optional.
+	# Test the output files.
     print("Check...")
     # Check if the file exist in the ouput folder.
     if (name + ext) in os.listdir(out_dir):
