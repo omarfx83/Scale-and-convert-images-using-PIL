@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+import glob, os
+from PIL import Image
+
+
+in_dir = "images/"
+out_dir = "opt/icons/"
+ext = ".jpeg"
+
+# Iterate over the files.
+for img in os.listdir(in_dir):
+    # Avoid .DS_Store file
+    if img != ".DS_Store":
+        name = img.split("/")[-1]
+        print("Processing file: " + name + "...")
+        # Open image.
+        with Image.open(in_dir+img) as im:
+            print('Size: ' + str(im.size))
+            print('Format: ' + str(im.format))
+            # Resize, rotate and convert to RGB.
+            new_im = im.resize((128,128)).rotate(-90,expand=True).convert('RGB')
+            # Save the image.
+            new_im.save(out_dir + name + ext)
+            im.close()
+            print()
+
+        # Test the output files.
+        print("Check...")
+        # Check if the file exist in the ouput folder.
+        if (name + ext) in os.listdir(out_dir):
+            print('File converted successfully!')
+            print(out_dir + name + ext)
+            # Check the output size and format.
+            with Image.open(out_dir + name + ext) as out_im:
+                print('New size: ' + str(out_im.size))
+                print('New format: ' + str(out_im.format))
+                print()
+                print()
+            out_im.close()
+        else:
+            # If the file not exist print error.
+            print("ERROR, File conversion fail!!!")
+            print()
+    else:
+        continue
