@@ -26,7 +26,7 @@ for img in os.listdir(in_dir):
             print()
 
         # The following testing block is optional.
-		# Test the output files.
+        # Test the output files.
         print("Check...")
         # Check if the file exist in the ouput folder.
         if (name + ext) in os.listdir(out_dir):
