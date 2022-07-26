@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+import glob, os
+from PIL import Image
+
+
+in_dir = "images/"
+out_dir = "opt/icons/"
+ext = ".jpeg"
+
+# Iterate over the files.
+for img in glob.glob(in_dir + "/*"):
+    name = img.split("/")[-1]
+    print("Processing file: " + img + '...')
+    # Open image.
+    with Image.open(img) as im:
+        print('Original size: ' + str(im.size))
+        print('Original format: ' + str(im.format))
+        # Resize and rotate image.
+        new_im = im.resize((128,128)).rotate(-90,expand=True)
+        # Save the image.
+        new_im.convert('RGB').save(out_dir + name + ext)
+        im.close()
+        print()
+
+    # Test the output files.
+    print("Check...")
+    # Check if the file exist in the ouput folder.
+    if (name + ext) in os.listdir(out_dir):
+        print('File converted successfully!')
+        print(out_dir + name + ext)
+        # Check the output size and format.
+        with Image.open(out_dir + name + ext) as out_im:
+            print('New size: ' + str(out_im.size))
+            print('New format: ' + str(out_im.format))
+            print()
+            print()
+        out_im.close()
+    # If the file not exist print error.
+    else:
+        print("ERROR, File conversion fail!!!")
+        print()
+		
